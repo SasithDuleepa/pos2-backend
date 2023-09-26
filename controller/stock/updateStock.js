@@ -8,18 +8,23 @@ const Update = (req, res) => {
     const parsedUrl = url.parse(urlString);
     const queryParams = querystring.parse(parsedUrl.query);
     const parameter = queryParams.id;
-    const { supplier_name , supplier_address , supplier_contact ,supplier_email , supplier_nic } = req.body;
+
+    const{stock_item,batch_no,supplier,stock_qty,taking_price,selling_price,stock_date,current_qty} = req.body;
 
     if( parameter !== ""){
-        const query = `UPDATE supplier SET supplier_name = '${supplier_name}',supplier_address = '${supplier_address}',supplier_contact = '${supplier_contact}',supplier_email = '${supplier_email}',supplier_nic = '${supplier_nic}' WHERE supplier_id = ${parameter}`;
+        const query = `UPDATE stock SET stock_item = '${stock_item}',batch_no = '${batch_no}',supplier = '${supplier}',stock_qty = '${stock_qty}',taking_price = '${taking_price}',selling_price = '${selling_price}',stock_date = '${stock_date}',current_qty = '${current_qty}' WHERE stock_id = ${parameter}`;
         DB.connection.query(query, (err, result) => {
             if (err) {
                 res.send({status:500 , message:"Internal server error"})
             } else {
-                res.send({status:200 , message:"Supplier updated successfully"})
+                res.send({status:200 , message:"Stock updated successfully"})
             }
+
         })
-    }   
+    
 
 }
+
+}
+
 module.exports = Update;

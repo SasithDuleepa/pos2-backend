@@ -7,7 +7,7 @@ const Delete = (req, res) => {
     const urlString = req.url;
     const parsedUrl = url.parse(urlString);
     const queryParams = querystring.parse(parsedUrl.query);
-    const parameter = queryParams.catergory_id;
+    const parameter = queryParams.id;
     // console.log(parameter)
     if(parameter !== ""){
         const query = `DELETE FROM customer WHERE customer_id = ${parameter}`;
