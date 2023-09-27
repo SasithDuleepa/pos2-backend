@@ -7,6 +7,7 @@ const cors = require('cors');
 const CustomerRoutes = require('./routes/customerRoutes');
 const SupplierRoutes = require('./routes/supplierRoutes');
 const StockRoutes = require('./routes/stockRoutes');
+const BillRoutes = require('./routes/billRoutes');  
 
 const app = express();  
 
@@ -19,7 +20,8 @@ app.use(cors({origin: 'http://localhost:3000',}));
 
 app.use('/customers', CustomerRoutes);
 app.use('/suppliers', SupplierRoutes);
-app.use('/stock', StockRoutes)
+app.use('/stock', StockRoutes);
+app.use('/bills', BillRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
