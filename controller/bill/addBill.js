@@ -5,7 +5,8 @@ const Add = (req,res) =>{
     console.log(req.body);
     
     if(bill_id !=="" || customer !==""  || date !==""  || payment_method !==""  || discount !==""  || bill_total !==""  || items !=="" ){
-        const bill_query = `INSERT INTO bill ( bill_id, bill_customer, bil_date, bill_method, bill_discount, bill_total,payment_status) VALUES ('${bill_id}','${customer}','${date}','${payment_method}','${discount}','${bill_total}','${payment_status}')`;  
+        const mysqlFormattedDate = formatDateToMySQLFormat(date);
+        const bill_query = `INSERT INTO bill ( bill_id, bill_customer, bil_date, bill_method, bill_discount, bill_total,payment_status) VALUES ('${bill_id}','${customer}','${mysqlFormattedDate}','${payment_method}','${discount}','${bill_total}','${payment_status}')`;  
         DB.connection.query(bill_query, (err, result) => {
             if(result){
                 if(items.length > 0){
@@ -34,6 +35,15 @@ const Add = (req,res) =>{
     
 
 }
+
+function formatDateToMySQLFormat(inputDate) {
+    const parts = inputDate.split('/');
+    const month = parts[0].padStart(2, '0');
+    const day = parts[1].padStart(2, '0');
+    const year = parts[2];
+  
+    return `${year}-${month}-${day}`;
+  }
 module.exports = Add;
 
 
