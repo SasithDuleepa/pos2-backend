@@ -8,7 +8,7 @@ const BillItems_id = (req, res) => {
     const parsedUrl = url.parse(urlString);
     const queryParams = querystring.parse(parsedUrl.query);
     const bilId  = queryParams.id;
-    console.log(bilId)
+    // console.log(bilId)
 
     if(bilId){
         const query = `SELECT * FROM bill_item WHERE bill_id = '${bilId}'`;
